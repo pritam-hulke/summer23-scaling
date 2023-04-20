@@ -1,0 +1,17 @@
+trigger PopulateNoOfContact on Contact (after insert, after update, after delete, after undelete) {
+    if(trigger.isinsert || trigger.isundelete ){
+        if(trigger.isafter){
+            ContactTriggerHandler.updateAccountContactCountOninstOrUndel(trigger.new);
+        }
+    }
+    if(trigger.isdelete ){
+        if(trigger.isafter){
+            ContactTriggerHandler.updateAccountContactCountOnDel(trigger.old);
+        }
+    }
+    if(trigger.isupdate){
+        if(trigger.isafter){
+            ContactTriggerHandler.updateAccountContactCountOnUpdate(trigger.new, trigger.oldMap);
+        }
+    }
+}
