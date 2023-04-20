@@ -1,0 +1,9 @@
+public class ClassQueryRecent10Acc {
+	@AuraEnabled
+    public static list<Account> GetAccData(){
+        list<account> acclist = [SELECT Id, Name, Rating, Phone FROM Account ORDER BY CreatedDate DESC NULLS FIRST LIMIT 10];
+        system.debug(acclist);
+        return acclist;
+        
+    }
+}
